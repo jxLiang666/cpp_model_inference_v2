@@ -34,6 +34,7 @@
 ## 工程构建
 ### 拉取源码
 ```bash
+git clone https://github.com/jxLiang666/my_cpp_prj_template_sim.git
 ```
 ### 编译编译选项
 ```bash
