@@ -1,41 +1,11 @@
-# C++ 工程模板 精简版
-
-## 第三方库
-- [spdlog](https://github.com/gabime/spdlog)
-- [googletest](https://github.com/google/googletest)
-
-## 结构
-``` text
-├── CMakeLists.txt
-├── cmake
-│   └── .cmake
-├── config
-│   ├── CMakesLists.txt
-│   └── config.h.in
-├── core
-│   ├── CMakeLists.txt
-│   └── ...
-├── deps
-│   ├── CMakesLists.txt
-│   ├── 
-│   └── ...
-├── examples
-│   ├── CMakeLists.txt
-│   └── ...
-├── src
-│   ├── CMakesLists.txt
-│   ├── 
-│   └── ...
-└── tests
-    ├── CMakeLists.txt
-    └── ...
-```
+# C++模型推理 v2
 
 ## 工程构建
 ### 拉取源码
 ```bash
-git clone https://github.com/jxLiang666/my_cpp_prj_template_sim.git
+git clone https://github.com/jxLiang666/cpp_model_inference_v2.git
 ```
+
 ### 编译编译选项
 ```bash
 cmake -DEXAMPLES=ON \
