@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
 
-PROJECT("My_Cpp_Prj_Template_Sim" 
+PROJECT("cpp_model_inference_v2" 
 VERSION 0.0.1
 LANGUAGES C CXX)
 
