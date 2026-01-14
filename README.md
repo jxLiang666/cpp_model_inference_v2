@@ -12,6 +12,9 @@
 ├── config
 │   ├── CMakesLists.txt
 │   └── config.h.in
+├── core
+│   ├── CMakeLists.txt
+│   └── ...
 ├── deps
 │   ├── CMakesLists.txt
 │   ├── 
@@ -34,6 +37,10 @@
 ```
 ### 编译编译选项
 ```bash
+cmake -DEXAMPLES=ON \
+      -DTESTS=ON \
+      -DCMAKE_BUILD_TYPE=Debug \
+      ..
 ```
 ### 编译
 ```bash

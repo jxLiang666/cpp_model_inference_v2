@@ -1,0 +1,11 @@
+文件: AddAllSubdirExecutables.cmake
+    作用: 递归查找当前路径下的所有cpp文件,并且为所有cpp文件创建可执行文件
+    备注: 当且仅当所有cpp无第三方依赖时可以使用
+
+文件: AddAllSubdirectory.cmake
+    作用: 为当前路径下的所有文件夹执行add_subdirectory命令
+    备注: 需要给每个子文件夹编写CMakeLists.txt
+
+文件: AddAllConfig.cmake
+    作用: 为当前路径下的所有配置文件执行configure_file命令
+    备注: 每个配置文件只能放在config下,且结尾必须是.in
