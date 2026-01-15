@@ -26,7 +26,7 @@ function(add_all_subdirectory SRC_DIR)
             option(${dir_name} "Add ${dir_name} or not" ${default_value})
 
             # 打印结果
-            # message(STATUS "${dir_name} = ${${dir_name}}")
+            message(STATUS "${dir_name} = ${${dir_name}}")
             if(EXISTS "${child_path}/CMakeLists.txt")
                 if(${dir_name})
                 message(STATUS "📂 Adding subdirectory     : ${child_path}")

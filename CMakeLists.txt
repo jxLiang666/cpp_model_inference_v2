@@ -18,6 +18,7 @@ option(CPP_TMPL_TESTS "Build tests" ${TESTS}) # 是否编译 tests [确保google
 
 add_subdirectory(./config)
 add_subdirectory(./deps)
+add_subdirectory(./core)
 add_subdirectory(./src)
 
 if (${CPP_TMPL_TESTS})
