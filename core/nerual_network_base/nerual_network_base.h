@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "net_data.h"
+#include "nn_global_logger.h"
 namespace nn {
 /// @brief 神经网络基类
 /// @details
@@ -31,8 +32,53 @@ public:
     inline const std::vector< size_t >                 &getOutputElementSize() { return output_element_size_; }      ///< 获取输出元素每个单位所占內存(byte)
     inline const std::vector< size_t >                 &getOutputSize() { return output_size_; }                     ///< 获取输出元素每个所占总内存(byte)
 
-    inline void setInputShape(const std::vector< std::vector< int64_t > > _input_shape) { input_shape_ = _input_shape; }      ///< 设置输入的每个维度
-    inline void setOutputShape(const std::vector< std::vector< int64_t > > _output_shape) { output_shape_ = _output_shape; }  ///< 设置输出的每个维度
+    // 需要在类初始化的时候，对 input_element_size_ 已经赋值才可以
+    inline void setInputShape(const std::vector< std::vector< int64_t > > &_input_shape) {  ///< 设置输入的每个维度, 同时修改元素个数和所占的总内存
+        if (_input_shape.size() != input_element_size_.size()) {
+            NN_ERROR(
+                "When set input shape, the size of _input_shape ({}) "
+                "must be the same as input_element_size_ ({})!",
+                _input_shape.size(),
+                input_element_size_.size());
+            throw std::invalid_argument(
+                "setInputShape: _input_shape size mismatch with input_element_size_");
+        }
+        input_shape_ = _input_shape;
+        input_element_counts_.resize(_input_shape.size());
+        input_size_.resize(_input_shape.size());
+        for (size_t i = 0; i < _input_shape.size(); ++i) {
+            size_t element_counts = 1;
+            for (size_t j = 0; j < _input_shape[i].size(); ++j) {
+                element_counts *= _input_shape[i][j];
+            }
+            input_element_counts_[i] = element_counts;
+            input_size_[i] = element_counts * input_element_size_[i];
+        }
+    }
+
+    // 需要在类初始化的时候，对 output_element_size_ 已经赋值才可以
+    inline void setOutputShape(const std::vector< std::vector< int64_t > > &_output_shape) {  ///< 设置输出的每个维度, 同时修改元素个数和所占的总内存
+        if (_output_shape.size() != output_element_size_.size()) {
+            NN_ERROR(
+                "When set output shape, the size of _output_shape ({}) "
+                "must be the same as output_element_size_ ({})!",
+                _output_shape.size(),
+                output_element_size_.size());
+            throw std::invalid_argument(
+                "setOutputShape: _output_shape size mismatch with output_element_size_");
+        }
+        output_shape_ = _output_shape;
+        output_element_counts_.resize(_output_shape.size());
+        output_size_.resize(_output_shape.size());
+        for (size_t i = 0; i < _output_shape.size(); ++i) {
+            size_t element_counts = 1;
+            for (size_t j = 0; j < _output_shape[i].size(); ++j) {
+                element_counts *= _output_shape[i][j];
+            }
+            output_element_counts_[i] = element_counts;
+            output_size_[i] = element_counts * output_element_size_[i];
+        }
+    }
 
 protected:
     // 数据包装 [ batch1[data1,data2], batch2[data1,data2], batch3[data1,data2], batch4[data1,data2]]
