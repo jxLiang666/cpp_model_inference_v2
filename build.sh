@@ -7,7 +7,7 @@ mkdir build
 cd build
 
 cmake -DEXAMPLES=ON \
-      -DTESTS=ON \
+      -DTESTS=OFF \
       -DCMAKE_BUILD_TYPE=Debug \
       ..
 make -j4

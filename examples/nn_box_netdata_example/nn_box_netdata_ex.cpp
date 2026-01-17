@@ -10,8 +10,4 @@ int main(){
 
     Box box2 = Box{1,1,2,2};
     std::cout<<"the iou of box1 and box2 is "<<Box::iou(box1,box2)<<std::endl;
-
-    auto data1 = nn::NetData(10);
-    NN_DEBUG("hello world");
-    std::cout<<data1.getTotalSize()<<std::endl;
 }

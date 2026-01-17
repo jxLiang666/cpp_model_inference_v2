@@ -16,6 +16,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)   # 设置可执行�
 option(CPP_TMPL_EX "Build examples" ${EXAMPLES}) # 是否编译 examples
 option(CPP_TMPL_TESTS "Build tests" ${TESTS}) # 是否编译 tests [确保googletest 是ON的状态才行]
 
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_compile_definitions(DEBUG)
+endif()
+
 add_subdirectory(./config)
 add_subdirectory(./deps)
 add_subdirectory(./core)

@@ -25,3 +25,4 @@ Testing
 tests/**/test_out
 .clang-format
 data
+rebuild.sh
