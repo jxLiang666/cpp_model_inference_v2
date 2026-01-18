@@ -83,6 +83,7 @@ int Onnx::init() {
     std::stringstream ss;
     ss << "model path: " << model_path_ << std::endl;
     session_options_ = Ort::SessionOptions();
+    session_options_.SetGraphOptimizationLevel(ORT_ENABLE_ALL);
     session_ = Ort::Session(env_, model_path_.c_str(), session_options_);
 
     input_nodes_num_ = session_.GetInputCount();
