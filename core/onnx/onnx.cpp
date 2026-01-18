@@ -128,6 +128,7 @@ int Onnx::process(NetBaseInputData &_input, NetBaseOutputData &_output) {
         output_node_names_c_.data(),
         output_nodes_num_);
 
+    assert(_output.size() == 0);
     _output.reserve(output_nodes_num_);
     for (size_t i = 0; i < output_nodes_num_; ++i) {
         // 零拷贝，_output的生命周期同output_tensors_, 即单次推理，与Onnx类同生命周期
