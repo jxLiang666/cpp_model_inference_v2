@@ -21,21 +21,19 @@ int main() {
     std::ifstream f("data/model_path.txt");
     std::string   model_path;
     std::getline(f, model_path);
-    std::unique_ptr< nn::NerualNetworkBase > net_base = std::make_unique< DebugNet >(model_path);
-    int                                      batch_size = 10;
+    std::unique_ptr< nn::NerualNetworkBase >            net_base = std::make_unique< DebugNet >(model_path);
+    std::unique_ptr< DemoDataAdapter >                  adapter = std::make_unique< DemoDataAdapter >();
+    std::unique_ptr< NerualNetwork< DemoDataAdapter > > net = std::make_unique< NerualNetwork< DemoDataAdapter > >();
+    net->init(net_base, adapter);
 
+    int                  batch_size = 10;
     std::vector< float > tmp_data(batch_size * 3 * 16 * 16, 0.1);
     NetBaseDataTypeVec   input;
     DataShapeVec         input_shape{batch_size, 3, 16, 16};
     DataShapeVec         output1_shape{batch_size, 10};
     DataShapeVec         output2_shape{batch_size, 16, 8, 8};
-    net_base->setInputShape({input_shape, input_shape});
-    net_base->setOutputShape({output1_shape, output2_shape});
-
-    std::unique_ptr< DemoDataAdapter >                  adapter = std::make_unique< DemoDataAdapter >();
-    std::unique_ptr< NerualNetwork< DemoDataAdapter > > net = std::make_unique< NerualNetwork< DemoDataAdapter > >();
-    net->init(net_base, adapter);
-
+    net->setInputShape({input_shape, input_shape});
+    net->setOutputShape({output1_shape, output2_shape});
     std::vector< float > out = net->infer(tmp_data, batch_size, input_shape);
-    std::cout<<out[0]<<" "<<out[1]<<std::endl;
+    std::cout << out[0] << " " << out[1] << std::endl;
 }
