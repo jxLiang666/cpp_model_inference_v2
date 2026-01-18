@@ -98,7 +98,6 @@ int Onnx::init() {
 
     NN_DEBUG("%s", ss.str().c_str());
     memory_info_ = Ort::MemoryInfo::CreateCpu(OrtArenaAllocator, OrtMemTypeDefault);
-    std::cout << ss.str();
     return 0;
 }
 
