@@ -49,10 +49,10 @@ private:
         OnnxGetDataNameAllocatedFn                _onnxGetDataNameAllocatedFn,
         OnnxGetInputTypeInfoFn                    _onnxGetInputTypeInfoFn);  ///< init函数的辅助函数
 
-    std::string onnxRepr();                                                                                                                      ///< Onnx内部调试信息
-    static int  getOnnxTensorElementDataTypeSize(const ONNXTensorElementDataType &_type);                                                        ///< onnx数据类型的空间大小(byte)
-    static bool hasNegativeDim(const DataShapeVec &_shape);                                                                                      ///< 判断是否有负数维度，有返回true，没有返回false
-    static void logDynamicTensorShape(const std::string &_model_path, const DataShapeVec &_shape, const std::vector< const char * > &_symbols);  ///< init辅助函数
+    std::string onnxRepr();                                                                                                                                         ///< Onnx内部调试信息
+    static int  getOnnxTensorElementDataTypeSize(const ONNXTensorElementDataType &_type);                                                                           ///< onnx数据类型的空间大小(byte)
+    static bool hasNegativeDim(const DataShapeVec &_shape);                                                                                                         ///< 判断是否有负数维度，有返回true，没有返回false
+    static void logDynamicTensorShape(const std::string &_model_path, const char *_name, const DataShapeVec &_shape, const std::vector< const char * > &_symbols);  ///< init辅助函数
 
 private:
     Ort::Env                         env_{nullptr};              ///< ONNX Runtime 环境

@@ -47,7 +47,7 @@ void Onnx::initHelper(std::stringstream                        &_ss,
             count = tensor_info.GetElementCount();
         } else {
             auto symbols = tensor_info.GetSymbolicDimensions();
-            logDynamicTensorShape(model_path_, shape, symbols);
+            logDynamicTensorShape(model_path_, name.get(), shape, symbols);
         }
         auto size = count * element_size;
 
@@ -203,9 +203,9 @@ bool Onnx::hasNegativeDim(const DataShapeVec &_shape) {
     return false;
 }
 
-void Onnx::logDynamicTensorShape(const std::string &_model_path, const DataShapeVec &_shape, const std::vector< const char * > &_symbols) {
+void Onnx::logDynamicTensorShape(const std::string &_model_path, const char *_name, const DataShapeVec &_shape, const std::vector< const char * > &_symbols) {
     std::stringstream ss;
-    ss << "model path: " << _model_path << std::endl;
+    ss << "model path: " << _model_path << " name:" << _name << std::endl;
     ss << "Tensor has dynamic shape, element count cannot be determined at load time. shape=[";
 
     for (size_t i = 0; i < _shape.size(); ++i) {
