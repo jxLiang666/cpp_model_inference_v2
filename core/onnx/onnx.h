@@ -23,15 +23,15 @@ public:
 protected:
     int                 init() override;
     int                 deinit() override;
-    int                 preprocess(NetBaseDataTypeVec &_input) override;
-    int                 process(NetBaseDataTypeVec &_input, NetBaseDataTypeVec &_output) override;
+    int                 preprocess(NetBaseInputData &_input) override;
+    int                 process(NetBaseInputData &_input, NetBaseOutputData &_output) override;
     virtual std::string repr();  ///< 打印详细的信息接口
 
 protected:
     ///< 需要实现infer函数
-    virtual int infer(NetBaseDataTypeVec &_input, NetBaseDataTypeVec &_output) = 0;
+    virtual int infer(NetBaseInputData &_input, NetBaseOutputData &_output) = 0;
     ///< 需要实现postprocess函数
-    virtual int postprocess(NetBaseDataTypeVec &_output) = 0;
+    virtual int postprocess(NetBaseOutputData &_output) = 0;
 
 private:
     void initHelper(

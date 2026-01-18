@@ -19,14 +19,14 @@ public:
 
     /// @brief 创建模型输入
     template < typename... Args >
-    NetBaseDataTypeVec createInputData(Args &&..._args) noexcept(noexcept(std::declval< Derived & >().doCreateInput(std::forward< Args >(_args)...))) {
+    NetBaseInputData createInputData(Args &&..._args) noexcept(noexcept(std::declval< Derived & >().doCreateInput(std::forward< Args >(_args)...))) {
         static_assert(std::is_base_of_v< DataAdapterBase, Derived >,
                       "Derived must inherit from DataAdapterBase<Derived>");
         return static_cast< Derived * >(this)->doCreateInput(std::forward< Args >(_args)...);
     }
 
     /// @brief 创建模型输出
-    auto createOutputData(NetBaseDataTypeVec &_output) noexcept(noexcept(std::declval< Derived & >().doCreateOutput(_output))) -> decltype(auto) {
+    auto createOutputData(NetBaseOutputData &_output) noexcept(noexcept(std::declval< Derived & >().doCreateOutput(_output))) -> decltype(auto) {
         static_assert(std::is_base_of_v< DataAdapterBase, Derived >,
                       "Derived must inherit from DataAdapterBase<Derived>");
         return static_cast< Derived * >(this)->doCreateOutput(_output);

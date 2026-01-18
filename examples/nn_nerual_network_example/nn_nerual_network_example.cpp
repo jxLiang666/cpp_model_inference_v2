@@ -9,11 +9,11 @@ class DebugNet : public Onnx {
 public:
     DebugNet(const std::string &_model_path) : nn::Onnx(_model_path) {};
 
-    int infer(NetBaseDataTypeVec &_input, NetBaseDataTypeVec &_output) {
+    int infer(NetBaseInputData &_input, NetBaseOutputData &_output) {
         pipeline(_input, _output);
         return 0;
     }
-    int postprocess(NetBaseDataTypeVec &_output) {
+    int postprocess(NetBaseOutputData &_output) {
         return 0;
     }
 };
@@ -28,7 +28,7 @@ int main() {
 
     int                  batch_size = 10;
     std::vector< float > tmp_data(batch_size * 3 * 16 * 16, 0.1);
-    NetBaseDataTypeVec   input;
+    NetBaseInputData     input;
     DataShapeVec         input_shape{batch_size, 3, 16, 16};
     DataShapeVec         output1_shape{batch_size, 10};
     DataShapeVec         output2_shape{batch_size, 16, 8, 8};

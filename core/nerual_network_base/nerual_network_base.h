@@ -5,6 +5,8 @@
 #include "nn_global_logger.h"
 namespace nn {
 using NetBaseDataTypeVec = std::vector< NetData >;
+using NetBaseInputData = NetBaseDataTypeVec;
+using NetBaseOutputData = NetBaseDataTypeVec;
 /// @brief 神经网络基类
 /// @details
 /// NerualNetworkBase 提供了神经网络推理的统一接口，包括模型初始化、前处理、
@@ -18,8 +20,8 @@ public:
     NerualNetworkBase &operator=(NerualNetworkBase &&) = default;
     NerualNetworkBase &operator=(const NerualNetworkBase &) = default;
     virtual ~NerualNetworkBase() = default;
-    virtual int         infer(NetBaseDataTypeVec &_input, NetBaseDataTypeVec &_output) = 0;  ///< 推理接口
-    virtual std::string repr();                                                              ///< 打印详细的信息接口
+    virtual int         infer(NetBaseInputData &_input, NetBaseOutputData &_output) = 0;  ///< 推理接口
+    virtual std::string repr();                                                           ///< 打印详细的信息接口
 
     inline const auto &getName() const noexcept { return name_; }             ///< 获取模型名字
     inline const auto &getModelPath() const noexcept { return model_path_; }  ///< 获取模型路径
@@ -42,12 +44,12 @@ public:
 
 protected:
     // 数据包装 [data1, data2]
-    int         pipeline(NetBaseDataTypeVec &_input, NetBaseDataTypeVec &_output);     ///< 封装整个前处理到后处理流程
-    virtual int init() = 0;                                                            ///< 初始化
-    virtual int deinit() = 0;                                                          ///< 反初始化
-    virtual int preprocess(NetBaseDataTypeVec &_input) = 0;                            ///< 数据预处理
-    virtual int process(NetBaseDataTypeVec &_input, NetBaseDataTypeVec &_output) = 0;  ///< 对应框架核心推理
-    virtual int postprocess(NetBaseDataTypeVec &_output) = 0;                          ///< 模型数据后处理
+    int         pipeline(NetBaseInputData &_input, NetBaseOutputData &_output);     ///< 封装整个前处理到后处理流程
+    virtual int init() = 0;                                                         ///< 初始化
+    virtual int deinit() = 0;                                                       ///< 反初始化
+    virtual int preprocess(NetBaseInputData &_input) = 0;                           ///< 数据预处理
+    virtual int process(NetBaseInputData &_input, NetBaseOutputData &_output) = 0;  ///< 对应框架核心推理
+    virtual int postprocess(NetBaseOutputData &_output) = 0;                        ///< 模型数据后处理
 
     std::string nnbaseRepr();  ///< NerualNetworkBase内部调试信息
 

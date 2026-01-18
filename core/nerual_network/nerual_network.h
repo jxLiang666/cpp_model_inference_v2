@@ -34,9 +34,9 @@ public:
 
     template < typename... Args >
     auto infer(Args &&..._args) -> decltype(auto) {  ///< 核心推理接口
-        auto               input = adapter_->createInputData(std::forward< Args >(_args)...);
-        NetBaseDataTypeVec output;
-        auto               ret = model_->infer(input, output);
+        auto              input = adapter_->createInputData(std::forward< Args >(_args)...);
+        NetBaseOutputData output;
+        auto              ret = model_->infer(input, output);
         if (ret) {
             std::stringstream ss;
             ss << "Error occurs in model infer of " << model_->getName() << " , ret is " << ret;

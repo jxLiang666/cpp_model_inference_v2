@@ -1,6 +1,6 @@
 #include "nerual_network_base.h"
 namespace nn {
-int NerualNetworkBase::pipeline(NetBaseDataTypeVec &_input, NetBaseDataTypeVec &_output) {
+int NerualNetworkBase::pipeline(NetBaseInputData &_input, NetBaseOutputData &_output) {
     int ret = 0;
     ret = preprocess(_input);
     if (ret != 0) return ret;

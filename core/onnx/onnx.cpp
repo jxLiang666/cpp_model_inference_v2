@@ -105,7 +105,7 @@ int Onnx::deinit() {
     return 0;
 }
 
-int Onnx::preprocess(NetBaseDataTypeVec &_input) {
+int Onnx::preprocess(NetBaseInputData &_input) {
     input_tensors_.resize(_input.size());  // 输入数量相同
     for (size_t i = 0; i < _input.size(); ++i) {
         assert(input_shape_[i] == _input[i].getShape());
@@ -119,7 +119,7 @@ int Onnx::preprocess(NetBaseDataTypeVec &_input) {
     }
     return 0;
 }
-int Onnx::process(NetBaseDataTypeVec &_input, NetBaseDataTypeVec &_output) {
+int Onnx::process(NetBaseInputData &_input, NetBaseOutputData &_output) {
     output_tensors_ = session_.Run(
         Ort::RunOptions{nullptr},
         input_node_names_c_.data(),
