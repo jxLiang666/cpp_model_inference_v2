@@ -4,14 +4,15 @@
 #include "nerual_network_base.h"
 
 namespace nn {
-using OnnxDataTypeVec = std::vector< Ort::Value >;
-using OnnxGetDataNameAllocatedFn = Ort::AllocatedStringPtr (Ort::Session::*)(size_t, OrtAllocator *) const;
-using OnnxGetInputTypeInfoFn = Ort::TypeInfo (Ort::Session::*)(size_t) const;
 /// @brief ONNX 神经网络实现类
 /// @details
 /// Onnx 类继承自 NerualNetworkBase，用于加载和运行 ONNX 格式的神经网络模型。
 /// 它封装了 ONNX Runtime 的会话管理、输入输出张量处理、前处理和后处理。
 class Onnx : public NerualNetworkBase {
+    using OnnxDataTypeVec = std::vector< Ort::Value >;
+    using OnnxGetDataNameAllocatedFn = Ort::AllocatedStringPtr (Ort::Session::*)(size_t, OrtAllocator *) const;
+    using OnnxGetInputTypeInfoFn = Ort::TypeInfo (Ort::Session::*)(size_t) const;
+
 public:
     Onnx(const std::string &_model_path);
     Onnx(Onnx &&) = default;
